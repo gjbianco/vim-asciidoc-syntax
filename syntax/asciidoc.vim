@@ -4,9 +4,6 @@
 " Filenames:    *.adoc
 " vim: et sw=4
 
-" arguably not syntax, but add commentary support
-autocmd FileType asciidoc setlocal commentstring=//\ %s
-
 if exists("b:current_syntax")
     finish
 endif
@@ -319,3 +316,6 @@ let b:current_syntax = "asciidoctor"
 if main_syntax ==# 'asciidoctor'
     unlet main_syntax
 endif
+
+" arguably not syntax, but add commentary support
+autocmd FileType asciidoc setlocal commentstring=//\ %s
