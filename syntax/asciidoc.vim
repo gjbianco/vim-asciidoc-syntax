@@ -4,6 +4,9 @@
 " Filenames:    *.adoc
 " vim: et sw=4
 
+" arguably not syntax, but add commentary support
+autocmd FileType asciidoc setlocal commentstring=//\ %s
+
 if exists("b:current_syntax")
     finish
 endif
