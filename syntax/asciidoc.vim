@@ -1,8 +1,33 @@
 " Vim syntax file
-" Language:     asciidoctor
-" Maintainer:   Maxim Kim <habamax@gmail.com>
+" Language:     asciidoc
+" Maintainer:   Guy Bianco IV <guy@guy.sh>
 " Filenames:    *.adoc
 " vim: et sw=4
+
+function! AsciidocFolds()
+  let thisline = getline(v:lnum)
+  if match(thisline, '^===== ') >= 0
+    return '>1'
+  elseif match(thisline, '^==== ') >= 0
+    return '>1'
+  elseif match(thisline, '^=== ') >= 0
+    return '>1'
+  " elseif match(thisline, '^== ') >= 0
+  "   return '>1'
+  " elseif match(thisline, '^= ') >= 0
+  "   return '>1'
+  elseif match(thisline, '^\w\. ') >= 0
+    let b:list_fold = 1
+    return '>1'
+  " elseif b:list_fold == 1 && match(thisline, '^$') >= 0
+  "   let b:list_fold = 0
+  "   return '<1'
+  else
+    return '='
+  endif
+endfunction
+setlocal foldmethod=expr
+setlocal foldexpr=AsciidocFolds()
 
 if exists("b:current_syntax")
     finish
