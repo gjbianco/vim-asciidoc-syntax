@@ -29,6 +29,15 @@ endfunction
 setlocal foldmethod=expr
 setlocal foldexpr=AsciidocFolds()
 
+function! AsciidocFoldText()
+  let indent = indent(v:foldstart) - &sw
+  let text_display = getline(v:foldstart)[:50] . ' '
+  let line_display = ' [' . (v:foldend - v:foldstart) . ' folded]'
+  let mid_display = repeat('-', winwidth(0) - (strdisplaywidth(line_display) + strdisplaywidth(text_display)))
+  return text_display . mid_display . line_display
+endfunction
+setlocal foldtext=AsciidocFoldText()
+
 if exists("b:current_syntax")
     finish
 endif
