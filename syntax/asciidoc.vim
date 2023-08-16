@@ -6,22 +6,10 @@
 
 function! AsciidocFolds()
   let thisline = getline(v:lnum)
-  if match(thisline, '^===== ') >= 0
+  if match(thisline, '^=\+ ') >= 0
     return '>1'
-  elseif match(thisline, '^==== ') >= 0
-    return '>1'
-  elseif match(thisline, '^=== ') >= 0
-    return '>1'
-  " elseif match(thisline, '^== ') >= 0
-  "   return '>1'
-  " elseif match(thisline, '^= ') >= 0
-  "   return '>1'
   elseif match(thisline, '^\w\. ') >= 0
-    let b:list_fold = 1
     return '>1'
-  " elseif b:list_fold == 1 && match(thisline, '^$') >= 0
-  "   let b:list_fold = 0
-  "   return '<1'
   else
     return '='
   endif
