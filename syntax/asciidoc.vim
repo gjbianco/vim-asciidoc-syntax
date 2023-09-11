@@ -4,11 +4,15 @@
 " Filenames:    *.adoc
 " vim: et sw=4
 
+let g:ref_match = '^\[#.\+-references]$'
+
 function! AsciidocFolds()
   let thisline = getline(v:lnum)
   if match(thisline, '^=\+ ') >= 0
     return '>1'
   elseif match(thisline, '^\w\. ') >= 0
+    return '>1'
+  elseif match(thisline, g:ref_match) >= 0
     return '>1'
   else
     return '='
@@ -19,7 +23,11 @@ setlocal foldexpr=AsciidocFolds()
 
 function! AsciidocFoldText()
   let indent = indent(v:foldstart) - &sw
-  let text_display = getline(v:foldstart)[:50] . ' '
+  let thisline = getline(v:foldstart)
+  if match(thisline, g:ref_match) >= 0
+    let thisline = '== References'
+  endif
+  let text_display = thisline[:50] . ' '
   let line_display = ' [' . (v:foldend - v:foldstart) . ' folded]'
   let mid_display = repeat('-', winwidth(0) - (strdisplaywidth(line_display) + strdisplaywidth(text_display)))
   return text_display . mid_display . line_display
