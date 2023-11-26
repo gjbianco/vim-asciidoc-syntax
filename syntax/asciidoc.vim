@@ -10,7 +10,7 @@ function! AsciidocFolds()
   let thisline = getline(v:lnum)
   if match(thisline, '^=\+ ') >= 0
     return '>1'
-  elseif match(thisline, '^\w\. ') >= 0
+  elseif match(thisline, '^\w\{,3}\. ') >= 0
     return '>1'
   elseif match(thisline, g:ref_match) >= 0
     return '>1'
