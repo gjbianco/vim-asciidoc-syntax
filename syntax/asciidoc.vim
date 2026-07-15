@@ -4,7 +4,7 @@
 " Filenames:    *.adoc
 " vim: et sw=4
 
-let g:ref_match = '^\[#.\+-references]$'
+let g:ref_match = '\c^\[.\+references.*]$'
 
 function! AsciidocFolds()
   let thisline = getline(v:lnum)
